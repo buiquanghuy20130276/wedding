@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thiệp Mời Đám Cưới - Bích Ngọc & Tấn Tài</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <!-- EmailJS SDK (optional - uncomment if using EmailJS) -->
+  <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script> -->
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="nav" id="nav">
+    <div class="nav-container">
+      <a href="#home" class="nav-logo">N & T</a>
+      <ul class="nav-links">
+        <li><a href="#home">Trang Chủ</a></li>
+        <li><a href="#couple">Cô Dâu & Chú Rể</a></li>
+        <li><a href="#story">Chuyện Tình</a></li>
+        <li><a href="#gallery">Album</a></li>
+        <li><a href="#event">Sự Kiện</a></li>
+        <li><a href="#rsvp">Gửi Lời Chúc</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <ul class="mobile-links">
+      <li><a href="#home">Trang Chủ</a></li>
+      <li><a href="#couple">Cô Dâu & Chú Rể</a></li>
+      <li><a href="#story">Chuyện Tình</a></li>
+      <li><a href="#gallery">Album</a></li>
+      <li><a href="#event">Sự Kiện</a></li>
+      <li><a href="#rsvp">Gửi Lời Chúc</a></li>
+    </ul>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="hero-hearts-container">
+      <div class="heart-bubble heart-1">💕</div>
+      <div class="heart-bubble heart-2">💖</div>
+      <div class="heart-bubble heart-3">💗</div>
+      <div class="heart-bubble heart-4">💝</div>
+      <div class="heart-bubble heart-5">💕</div>
+      <div class="heart-bubble heart-6">💖</div>
+      <div class="heart-bubble heart-7">💗</div>
+      <div class="heart-bubble heart-8">💝</div>
+      <div class="heart-bubble heart-9">💕</div>
+      <div class="heart-bubble heart-10">💖</div>
+      <div class="heart-bubble heart-11">💗</div>
+      <div class="heart-bubble heart-12">💝</div>
+      <div class="heart-bubble heart-13">💕</div>
+      <div class="heart-bubble heart-14">💖</div>
+      <div class="heart-bubble heart-15">💗</div>
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-subtitle fade-in">Trân trọng kính mời</p>
+      <h1 class="hero-title fade-in">
+        <span class="name">Bích Ngọc</span>
+        <span class="and">&</span>
+        <span class="name">Tấn Tài</span>
+      </h1>
+      <div class="hero-date fade-in">
+        <div class="date-divider"></div>
+        <p>Chúng mình sẽ kết hôn</p>
+        <h2>24 . 01 . 2026</h2>
+        <div class="date-divider"></div>
+      </div>
+      <div class="scroll-indicator">
+        <span>Cuộn xuống</span>
+        <div class="scroll-arrow"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Countdown Section -->
+  <section class="countdown-section">
+    <div class="countdown-bg-decoration"></div>
+    <div class="container">
+      <div class="countdown-header">
+        <span class="countdown-icon">💕</span>
+        <h2 class="countdown-title">Đếm Ngược Đến Ngày Trọng Đại</h2>
+        <p class="countdown-subtitle">Chúng mình đang chờ đợi khoảnh khắc đặc biệt này</p>
+      </div>
+      <div class="countdown" id="countdown">
+        <div class="countdown-item">
+          <div class="countdown-item-inner">
+            <span class="countdown-icon-small">📅</span>
+            <span class="countdown-number" id="days">00</span>
+            <span class="countdown-label">Ngày</span>
+          </div>
+        </div>
+        <div class="countdown-item">
+          <div class="countdown-item-inner">
+            <span class="countdown-icon-small">⏰</span>
+            <span class="countdown-number" id="hours">00</span>
+            <span class="countdown-label">Giờ</span>
+          </div>
+        </div>
+        <div class="countdown-item">
+          <div class="countdown-item-inner">
+            <span class="countdown-icon-small">⏱️</span>
+            <span class="countdown-number" id="minutes">00</span>
+            <span class="countdown-label">Phút</span>
+          </div>
+        </div>
+        <div class="countdown-item">
+          <div class="countdown-item-inner">
+            <span class="countdown-icon-small">✨</span>
+            <span class="countdown-number" id="seconds">00</span>
+            <span class="countdown-label">Giây</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Couple Section -->
+  <section class="couple-section" id="couple">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-subtitle">Giới thiệu</p>
+        <h2 class="section-title">Cô Dâu & Chú Rể</h2>
+        <div class="title-divider"></div>
+      </div>
+      
+      <div class="couple-grid">
+        
+        <div class="couple-card reveal-right">
+          <div class="couple-image">
+            <img src="images/v2.jpg" alt="Chú rể">
+            <div class="image-frame"></div>
+          </div>
+          <div class="couple-info">
+            <h3>Võ Tấn Tài</h3>
+            <p class="couple-role">Chú Rể</p>
+            <p class="couple-desc">Sinh ngày 24/01/1999. Một chàng trai chăm chỉ, nhiệt tình và đầy tình cảm. Người bạn thân thiết từ thuở học trò, giờ đây là người bạn đời của em.</p>
+          </div>
+        </div>
+        <div class="couple-heart">
+          <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16 28C16 28 3 18 3 10C3 5 7 2 11 2C13.5 2 15.5 3.5 16 5C16.5 3.5 18.5 2 21 2C25 2 29 5 29 10C29 18 16 28 16 28Z" fill="currentColor"/>
+          </svg>
+        </div>
+        
+        <div class="couple-card reveal-left">
+          <div class="couple-image">
+            <img src="images/v6.jpg" alt="Cô dâu">
+            <div class="image-frame"></div>
+          </div>
+          <div class="couple-info">
+            <h3>Bùi Thị Bích Ngọc</h3>
+            <p class="couple-role">Cô Dâu</p>
+            <p class="couple-desc">Sinh ngày 23/04/1999. Một cô gái xinh đẹp, thông minh và đầy tình cảm. Người bạn thân thiết từ thuở học trò, giờ đây là người bạn đời của anh.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Story Section -->
+  <section class="story-section" id="story">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-subtitle">Hành trình yêu</p>
+        <h2 class="section-title">Chuyện Tình Chúng mình</h2>
+        <div class="title-divider"></div>
+      </div>
+      
+      <div class="timeline">
+        <div class="timeline-item reveal-left">
+          <div class="timeline-content">
+            <div class="timeline-image">
+              <img src="images/v4.jpg" alt="Những ngày học trò">
+            </div>
+            <div class="timeline-text">
+              <span class="timeline-date">Năm 2012 - 2018</span>
+              <h3>Những Ngày Học Trò - Bạn Bè Thân Thiết</h3>
+              <p>Từ cấp 2 đến cấp 3, Chúng mình là những người bạn trong cùng nhóm bạn chơi thân. Cùng học, cùng chơi, cùng chia sẻ mọi niềm vui nỗi buồn tuổi học trò. Những kỷ niệm đẹp đẽ ấy đã tạo nên một tình bạn bền chặt, là nền tảng cho tình yêu sau này.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="timeline-item reveal-right">
+          <div class="timeline-content">
+            <div class="timeline-image">
+              <img src="images/v5.jpg" alt="Nghĩa vụ quân sự">
+            </div>
+            <div class="timeline-text">
+              <span class="timeline-date">Năm 2021 - 2023</span>
+              <h3>Nghĩa Vụ Quân Sự - Người Bạn Tâm Sự</h3>
+              <p>Năm 2021, anh lên đường nhập ngũ. Những ngày tháng xa nhà, xa bạn bè, xa tất cả những gì quen thuộc. Trong khoảng thời gian khó khăn ấy, em là người duy nhất anh tâm sự, là người luôn lắng nghe, động viên anh mỗi khi mệt mỏi. Những lá thư, những cuộc gọi, những tin nhắn đã trở thành nguồn động lực lớn nhất giúp anh vượt qua 2 năm nghĩa vụ. Chính trong khoảng thời gian ấy, anh nhận ra em không chỉ là bạn, mà là người quan trọng nhất trong cuộc đời anh.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="timeline-item reveal-left">
+          <div class="timeline-content">
+            <div class="timeline-image">
+              <img src="images/v7.jpg" alt="Lời tỏ tình">
+            </div>
+            <div class="timeline-text">
+              <span class="timeline-date">Năm 2023</span>
+              <h3>Lời Tỏ Tình - Sau 2 Năm Chờ Đợi</h3>
+              <p>Sau khi hoàn thành nghĩa vụ quân sự, anh trở về với quyết tâm rõ ràng. Những tháng ngày xa cách đã cho anh thời gian để nhận ra tình cảm của mình. Một buổi chiều đẹp trời, anh đã can đảm nói lên tất cả những gì đã tích tụ trong lòng. "Em có biết không, trong 2 năm ấy, em là người duy nhất anh nghĩ đến, là người duy nhất anh muốn chia sẻ mọi thứ. Anh yêu em, không chỉ là bạn nữa." Và em đã chấp nhận. Từ đó, Chúng mình chính thức bước vào hành trình yêu nhau.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="timeline-item reveal-right">
+          <div class="timeline-content">
+            <div class="timeline-image">
+              <img src="images/v3.jpg" alt="Hành trình yêu nhau">
+            </div>
+            <div class="timeline-text">
+              <span class="timeline-date">Năm 2023 - 2025</span>
+              <h3>Hành Trình Yêu Nhau - Có Cả Những Lúc Hơn Dỗi</h3>
+              <p>Từ năm 2023 đến nay, Chúng mình đã cùng nhau trải qua nhiều khoảnh khắc đẹp. Những buổi hẹn hò lãng mạn, những chuyến đi chơi cùng nhau, những lần cùng nhau đối mặt với khó khăn. Nhưng cuộc sống không phải lúc nào cũng màu hồng. Chúng mình cũng có những lúc hơn dỗi, những lúc bất đồng quan điểm, những lúc cảm thấy mệt mỏi. Nhưng mỗi lần như vậy, Chúng mình lại nhớ đến những ngày tháng khó khăn khi anh đi nghĩa vụ, nhớ đến việc em đã luôn ở bên. Và rồi Chúng mình lại làm lành, lại yêu thương nhau nhiều hơn. Những lúc hơn dỗi ấy không làm Chúng mình xa cách, mà ngược lại, nó giúp Chúng mình hiểu nhau hơn, yêu nhau sâu sắc hơn.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="timeline-item reveal-left">
+          <div class="timeline-content">
+            <div class="timeline-image timeline-image-keep-top">
+              <img src="images/v9.jpg" alt="Lời cầu hôn">
+            </div>
+            <div class="timeline-text">
+              <span class="timeline-date">Năm 2025</span>
+              <h3>Lời Cầu Hôn - Trọn Đời Bên Nhau</h3>
+              <p>Sau tất cả những gì đã trải qua - từ tình bạn thân thiết, đến những ngày xa cách khi anh đi nghĩa vụ, đến khi yêu nhau và cả những lúc hơn dỗi - Chúng mình đã hiểu rằng đây chính là người mình muốn dành cả đời. Dưới bầu trời đầy sao, tại nơi có nhiều kỷ niệm đẹp, anh quỳ xuống và cầu hôn. "Em đã ở bên anh trong những lúc khó khăn nhất, đã cùng anh vượt qua mọi thử thách. Giờ anh muốn mời em làm người bạn đời, cùng anh đi tiếp hành trình cuộc đời. Em có đồng ý không?" Em đã nói "Có" trong nước mắt hạnh phúc. Và từ đó, Chúng mình biết rằng đây là khởi đầu của một câu chuyện tình yêu vĩnh cửu, được xây dựng trên nền tảng vững chắc của tình bạn, sự tin tưởng và tình yêu chân thành.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section class="gallery-section" id="gallery">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-subtitle">Khoảnh khắc đẹp</p>
+        <h2 class="section-title">Album Ảnh Cưới</h2>
+        <div class="title-divider"></div>
+        <p class="gallery-intro">Những khoảnh khắc đáng nhớ trong hành trình yêu của chúng mình</p>
+      </div>
+      
+      <div class="gallery-masonry">
+        <!-- Ảnh lớn - Hero -->
+        <div class="gallery-item gallery-item-hero reveal">
+          <div class="gallery-item-inner">
+            <img src="images/v3.jpg" alt="Ảnh cưới 1">
+            <div class="gallery-overlay">
+              <div class="gallery-overlay-content">
+                <span class="gallery-icon">💕</span>
+                <span class="gallery-text">Khoảnh khắc đẹp nhất</span>
+              </div>
+            </div>
+            <div class="gallery-shine"></div>
+          </div>
+        </div>
+
+        <!-- Ảnh trung bình -->
+        <div class="gallery-item gallery-item-medium reveal">
+          <div class="gallery-item-inner">
+            <img src="images/v5.jpg" alt="Ảnh cưới 2">
+            <div class="gallery-overlay">
+              <div class="gallery-overlay-content">
+                <span class="gallery-icon">✨</span>
+                <span class="gallery-text">Xem ảnh</span>
+              </div>
+            </div>
+            <div class="gallery-shine"></div>
+          </div>
+        </div>
+
+        <!-- Ảnh nhỏ -->
+        <div class="gallery-item gallery-item-small reveal">
+          <div class="gallery-item-inner">
+            <img src="images/v3.jpg" alt="Ảnh cưới 3">
+            <div class="gallery-overlay">
+              <div class="gallery-overlay-content">
+                <span class="gallery-icon">💖</span>
+                <span class="gallery-text">Xem ảnh</span>
+              </div>
+            </div>
+            <div class="gallery-shine"></div>
+          </div>
+        </div>
+
+        <!-- Ảnh rộng -->
+        <div class="gallery-item gallery-item-wide reveal">
+          <div class="gallery-item-inner">
+            <img src="images/v7.jpg" alt="Ảnh cưới 4">
+            <div class="gallery-overlay">
+              <div class="gallery-overlay-content">
+                <span class="gallery-icon">🌹</span>
+                <span class="gallery-text">Xem ảnh</span>
+              </div>
+            </div>
+            <div class="gallery-shine"></div>
+          </div>
+        </div>
+
+        <!-- Ảnh cao -->
+        <div class="gallery-item gallery-item-tall gallery-item-reduce reveal">
+          <div class="gallery-item-inner">
+            <img src="images/v2.jpg" alt="Ảnh cưới 5">
+            <div class="gallery-overlay">
+              <div class="gallery-overlay-content">
+                <span class="gallery-icon">💐</span>
+                <span class="gallery-text">Xem ảnh</span>
+              </div>
+            </div>
+            <div class="gallery-shine"></div>
+          </div>
+        </div>
+
+        <!-- Ảnh trung bình -->
+        <div class="gallery-item gallery-item-medium gallery-item-reduce reveal">
+          <div class="gallery-item-inner">
+            <img src="images/v11.jpg" alt="Ảnh cưới 6">
+            <div class="gallery-overlay">
+              <div class="gallery-overlay-content">
+                <span class="gallery-icon">💑</span>
+                <span class="gallery-text">Xem ảnh</span>
+              </div>
+            </div>
+            <div class="gallery-shine"></div>
+          </div>
+        </div>
+
+        <!-- Ảnh nhỏ -->
+        <div class="gallery-item gallery-item-small reveal">
+          <div class="gallery-item-inner">
+            <img src="images/v8.jpg" alt="Ảnh cưới 7">
+            <div class="gallery-overlay">
+              <div class="gallery-overlay-content">
+                <span class="gallery-icon">🌺</span>
+                <span class="gallery-text">Xem ảnh</span>
+              </div>
+            </div>
+            <div class="gallery-shine"></div>
+          </div>
+        </div>
+
+        <!-- Ảnh trung bình -->
+        <div class="gallery-item gallery-item-medium reveal">
+          <div class="gallery-item-inner">
+            <img src="images/v10.jpg" alt="Ảnh cưới 8">
+            <div class="gallery-overlay">
+              <div class="gallery-overlay-content">
+                <span class="gallery-icon">🌸</span>
+                <span class="gallery-text">Xem ảnh</span>
+              </div>
+            </div>
+            <div class="gallery-shine"></div>
+          </div>
+        </div>
+
+        <!-- Ảnh rộng -->
+        <div class="gallery-item gallery-item-wide reveal">
+          <div class="gallery-item-inner">
+            <img src="images/v9.jpg" alt="Ảnh cưới 9">
+            <div class="gallery-overlay">
+              <div class="gallery-overlay-content">
+                <span class="gallery-icon">🌷</span>
+                <span class="gallery-text">Xem ảnh</span>
+              </div>
+            </div>
+            <div class="gallery-shine"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Event Section -->
+  <section class="event-section" id="event">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-subtitle">Thông tin chi tiết</p>
+        <h2 class="section-title">Thời Gian & Địa Điểm</h2>
+        <div class="title-divider"></div>
+      </div>
+      
+      <div class="events-grid">
+        <div class="event-card reveal-left">
+          <div class="event-icon">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3>Nhà trai</h3>
+          <div class="event-details">
+            <p><strong>Thời gian:</strong> 11:00 - Thứ Bảy, 24/01/2026</p>
+            <p><strong>Địa điểm:</strong> Giáo xứ Ngọc Đồng</p>
+            <p><strong>Địa chỉ:</strong>  ĐT746, Lạc An, TP. HCM</p>
+          </div>
+          <a href="https://maps.app.goo.gl/dPJ6RkSubgoosixJ8" target="_blank" class="event-btn">Xem bản đồ</a>
+        </div>
+        
+        <div class="event-card reveal-right">
+          <div class="event-icon">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 22C12 22 20 18 20 12V5L12 2L4 5V12C4 18 12 22 12 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M12 8V12L15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3>Nhà gái</h3>
+          <div class="event-details">
+            <p><strong>Thời gian:</strong> 11:00 - Chủ nhật, 25/01/2026</p>
+            <p><strong>Địa điểm:</strong> Giáo xứ Thượng Phúc</p>
+            <p><strong>Địa chỉ:</strong> ĐT746, Lạc An, TP. HCM</p>
+          </div>
+          <a href="https://maps.app.goo.gl/kxr9MKYpaeRkpGze8" target="_blank" class="event-btn">Xem bản đồ</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RSVP Section -->
+  <section class="rsvp-section" id="rsvp">
+    <div class="rsvp-bg">
+      <img src="images/v9.jpg" alt="RSVP background">
+    </div>
+    <div class="container">
+      <div class="section-header light">
+        <p class="section-subtitle">Gửi lời chúc</p>
+        <h2 class="section-title">Chia Sẻ Lời Chúc Của Bạn</h2>
+        <div class="title-divider"></div>
+        <p class="rsvp-description">Chúng mình rất vui khi được nhận những lời chúc tốt đẹp từ bạn! Hãy gửi lời chúc và xác nhận tham dự để Chúng mình có thể chuẩn bị tốt nhất cho ngày trọng đại.</p>
+      </div>
+      
+      <div class="rsvp-form-wrapper reveal">
+        <form class="rsvp-form" id="rsvpForm">
+          <div class="rsvp-form-header">
+            <h3>💕 Thông Tin Của Bạn</h3>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">
+                <span class="label-icon">👤</span>
+                Họ và tên <span class="required">*</span>
+              </label>
+              <input type="text" id="name" name="name" placeholder="Nhập họ và tên của bạn" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">
+                <span class="label-icon">📱</span>
+                Số điện thoại <span class="required">*</span>
+              </label>
+              <input type="tel" id="phone" name="phone" placeholder="Nhập số điện thoại" required>
+            </div>
+          </div>
+          
+          <div class="form-group full-width">
+            <label for="email">
+              <span class="label-icon">✉️</span>
+              Email
+            </label>
+            <input type="email" id="email" name="email" placeholder="your-email@example.com">
+          </div>
+          
+          <div class="rsvp-form-divider">
+            <span>💒</span>
+          </div>
+          
+          <div class="form-group full-width">
+            <label for="attendance">
+              <span class="label-icon">✅</span>
+              Bạn có thể tham dự đám cưới không? <span class="required">*</span>
+            </label>
+            <select id="attendance" name="attendance" required>
+              <option value="">-- Vui lòng chọn --</option>
+              <option value="yes">💕 Có, tôi sẽ tham dự với niềm vui lớn!</option>
+              <option value="no">😔 Xin lỗi, tôi không thể tham dự</option>
+            </select>
+          </div>
+          
+          <div class="form-group full-width" id="guestsGroup">
+            <label for="guests">
+              <span class="label-icon">👥</span>
+              Số khách đi cùng (không tính bạn)
+            </label>
+            <input type="number" id="guests" name="guests" placeholder="0" min="0" max="5" value="0">
+            <small>Số lượng người sẽ đi cùng bạn (tối đa 5 người)</small>
+          </div>
+          
+          <div class="rsvp-form-divider">
+            <span>💌</span>
+          </div>
+          
+          <div class="form-group full-width">
+            <label for="message">
+              <span class="label-icon">💝</span>
+              Lời chúc gửi đến cô dâu và chú rể
+            </label>
+            <textarea id="message" name="message" placeholder="Chia sẻ lời chúc của bạn với Chúng mình nhé... 💕" rows="5"></textarea>
+          </div>
+          
+          <div class="rsvp-submit-wrapper">
+            <button type="submit" class="submit-btn">
+              <span class="btn-text">Gửi Xác Nhận</span>
+              <span class="btn-icon">💕</span>
+            </button>
+            <p class="rsvp-note">Cảm ơn bạn đã dành thời gian! Chúng mình rất mong được gặp bạn trong ngày trọng đại.</p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-hearts">
+          <span>❤</span>
+          <span>❤</span>
+          <span>❤</span>
+        </div>
+        <h2 class="footer-title">Bích Ngọc & Tấn Tài</h2>
+        <p class="footer-date">24 . 01 . 2026</p>
+        <p class="footer-thanks">Cảm ơn bạn đã ghé thăm!</p>
+        <div class="footer-divider"></div>
+        <p class="footer-copyright">© 2026 - Bích Ngọc & Tấn Tài</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightboxClose">&times;</button>
+    <img src="/placeholder.svg" alt="Lightbox image" id="lightboxImg">
+    <button class="lightbox-prev" id="lightboxPrev">&#10094;</button>
+    <button class="lightbox-next" id="lightboxNext">&#10095;</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
