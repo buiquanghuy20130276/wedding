@@ -147,8 +147,8 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
   })
 })
 
-// RSVP Form Submission
-rsvpForm.addEventListener("submit", (e) => {
+// RSVP Form Submission with EmailJS
+rsvpForm.addEventListener("submit", async (e) => {
   e.preventDefault()
 
   const submitBtn = rsvpForm.querySelector(".submit-btn")
@@ -158,40 +158,257 @@ rsvpForm.addEventListener("submit", (e) => {
   // Show loading state
   submitBtn.disabled = true
   submitBtn.classList.add("loading")
-  btnText.textContent = "Đang gửi..."
+  
+  // Detect language for messages
+  const isEnglish = document.documentElement.lang === "en"
+  btnText.textContent = isEnglish ? "Sending..." : "Đang gửi..."
 
   const formData = new FormData(rsvpForm)
   const data = Object.fromEntries(formData)
 
-  // Simulate form submission with delay
-  setTimeout(() => {
-    // Simulate form submission
-    console.log("RSVP Form submitted:", data)
+  // Validate and sanitize form data
+  const sanitizedData = {
+    name: (data.name || '').trim(),
+    phone: (data.phone || '').trim(),
+    email: (data.email || '').trim(),
+    attendance: data.attendance || '',
+    guests: (data.guests || '0').trim(),
+    message: (data.message || '').trim()
+  }
 
-    // Show success message with better UI
+  // Validate required fields
+  if (!sanitizedData.name || !sanitizedData.phone || !sanitizedData.attendance) {
+    alert(isEnglish ? 'Please fill in all required fields.' : 'Vui lòng điền đầy đủ các trường bắt buộc.')
+    submitBtn.disabled = false
+    submitBtn.classList.remove("loading")
+    btnText.textContent = originalText
+    return
+  }
+
+  try {
+    // Check if EmailJS is available
+    if (typeof emailjs !== 'undefined') {
+      // EmailJS Configuration - UPDATE THESE VALUES
+      const EMAILJS_SERVICE_ID = 'service_g9i55mi' // Replace with your EmailJS Service ID
+      const EMAILJS_TEMPLATE_ID = 'template_vqket6f' // Replace with your EmailJS Template ID for RSVP notification
+      const EMAILJS_AUTO_REPLY_TEMPLATE_ID = 'template_td7ikxs' // Replace with your EmailJS Template ID for auto-reply
+      const EMAILJS_PUBLIC_KEY = 'gU-SMs97TMOMfbGg6' // Replace with your EmailJS Public Key
+      const RECIPIENT_EMAIL = 'bichngocbui339@gmail.com' // Replace with your email address
+
+      // Validate RECIPIENT_EMAIL
+      if (!RECIPIENT_EMAIL || !RECIPIENT_EMAIL.includes('@')) {
+        throw new Error('RECIPIENT_EMAIL is not configured correctly')
+      }
+
+      // Initialize EmailJS with public key
+      emailjs.init(EMAILJS_PUBLIC_KEY)
+
+      // Prepare email template parameters
+      const attendanceText = sanitizedData.attendance === 'yes' 
+        ? (isEnglish ? 'Yes, I will attend' : 'Có, tôi sẽ tham dự')
+        : (isEnglish ? 'Sorry, I cannot attend' : 'Xin lỗi, tôi không thể tham dự')
+      
+      // Map form data to template parameters
+      // IMPORTANT: In EmailJS template settings, "To Email" must be set to {{to_email}}
+      const templateParams = {
+        to_email: RECIPIENT_EMAIL,                    // This MUST match {{to_email}} in EmailJS template
+        to_name: 'Bích Ngọc & Tấn Tài',               // Optional: recipient name
+        from_name: sanitizedData.name,
+        from_email: sanitizedData.email || 'no-email@provided.com',
+        reply_to: sanitizedData.email || RECIPIENT_EMAIL,
+        subject: isEnglish 
+          ? `Wedding RSVP from ${sanitizedData.name}` 
+          : `RSVP Đám Cưới từ ${sanitizedData.name}`,
+        name: sanitizedData.name,                    // Maps to {{name}} in template
+        phone: sanitizedData.phone,                  // Maps to {{phone}} in template
+        email: sanitizedData.email || (isEnglish ? 'Not provided' : 'Không cung cấp'),  // Maps to {{email}} in template
+        attendance: attendanceText,                  // Maps to {{attendance}} in template
+        guests: sanitizedData.guests || '0',         // Maps to {{guests}} in template
+        message: sanitizedData.message || (isEnglish ? 'No message provided' : 'Không có lời nhắn'),  // Maps to {{message}} in template
+        wedding_date: '24.01.2026',                  // Maps to {{wedding_date}} in template
+        couple_names: 'Bích Ngọc & Tấn Tài'          // Maps to {{couple_names}} in template
+      }
+
+      // Validate templateParams before sending
+      if (!templateParams.to_email || !templateParams.to_email.includes('@')) {
+        throw new Error('to_email is required and must be a valid email address')
+      }
+
+      // Send RSVP notification email to couple
+      let rsvpEmailSent = false
+      try {
+        await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
+        rsvpEmailSent = true
+      } catch (rsvpError) {
+        console.error('RSVP notification failed:', rsvpError.status || rsvpError.text || rsvpError)
+      }
+
+      // Send auto-reply email to guest (only if they provided email)
+      // This is independent of RSVP notification - if one fails, the other can still succeed
+      let autoReplySent = false
+      if (sanitizedData.email && sanitizedData.email !== '') {
+        // Validate guest email
+        if (!sanitizedData.email.includes('@')) {
+          console.warn('Invalid guest email, skipping auto-reply:', sanitizedData.email)
+        } else {
+          try {
+            // Map form data to auto-reply template parameters
+            // IMPORTANT: to_email MUST be the guest's email, NOT RECIPIENT_EMAIL!
+            const autoReplyParams = {
+              to_email: sanitizedData.email,             // ⚠️ GUEST EMAIL - Maps to {{to_email}} in template
+              to_name: sanitizedData.name,               // Optional: guest name
+              from_name: 'Bích Ngọc & Tấn Tài',          // Maps to {{from_name}} in template
+              from_email: RECIPIENT_EMAIL,               // Maps to {{from_email}} in template
+              reply_to: RECIPIENT_EMAIL,                 // Maps to {{reply_to}} in template
+              subject: isEnglish 
+                ? `Thank you for your RSVP - Bích Ngọc & Tấn Tài Wedding` 
+                : `Cảm ơn bạn đã gửi RSVP - Đám Cưới Bích Ngọc & Tấn Tài`,
+              name: sanitizedData.name,                  // Maps to {{name}} in template
+              attendance: attendanceText,                 // Maps to {{attendance}} in template
+              guests: sanitizedData.guests || '0',       // Maps to {{guests}} in template (conditional)
+              wedding_date: '24.01.2026',                 // Maps to {{wedding_date}} in template
+              couple_names: 'Bích Ngọc & Tấn Tài'        // Maps to {{couple_names}} in template
+            }
+
+            // Validate auto-reply params before sending
+            if (!autoReplyParams.to_email || !autoReplyParams.to_email.includes('@')) {
+              throw new Error('Auto-reply to_email is required and must be a valid email address')
+            }
+
+            // CRITICAL CHECK: Verify we're sending to guest, not recipient
+            if (autoReplyParams.to_email === RECIPIENT_EMAIL) {
+              console.error('🚫 BLOCKED: Auto-reply to_email is same as RECIPIENT_EMAIL!')
+              console.error('   Guest email:', sanitizedData.email)
+              console.error('   Recipient email:', RECIPIENT_EMAIL)
+              console.error('   This would send auto-reply to you instead of the guest!')
+              console.warn('⚠️ Skipping auto-reply to prevent sending to wrong recipient')
+              // Don't send - this is a safety check
+              throw new Error('Auto-reply must be sent to guest email, not recipient email. Check EmailJS template settings!')
+            }
+
+            // Log before sending to verify correct recipient
+            console.log('📤 Preparing to send auto-reply:', {
+              to_email: autoReplyParams.to_email,
+              guest_email: sanitizedData.email,
+              recipient_email: RECIPIENT_EMAIL,
+              is_correct: autoReplyParams.to_email === sanitizedData.email,
+              is_wrong: autoReplyParams.to_email === RECIPIENT_EMAIL,
+              template_id: EMAILJS_AUTO_REPLY_TEMPLATE_ID,
+              all_params: autoReplyParams
+            })
+
+            // CRITICAL: Verify to_email is set and valid before sending
+            if (!autoReplyParams.to_email || autoReplyParams.to_email.trim() === '') {
+              throw new Error('to_email is empty! Cannot send auto-reply.')
+            }
+
+            // Send auto-reply email
+            // Note: EmailJS template MUST have "To Email" = {{to_email}} in settings!
+            console.log('🚀 Sending auto-reply with params:', {
+              service_id: EMAILJS_SERVICE_ID,
+              template_id: EMAILJS_AUTO_REPLY_TEMPLATE_ID,
+              to_email: autoReplyParams.to_email,
+              // Show all params for debugging
+              params_keys: Object.keys(autoReplyParams),
+              params_values: Object.values(autoReplyParams)
+            })
+            
+            const sendResult = await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_AUTO_REPLY_TEMPLATE_ID, autoReplyParams)
+            autoReplySent = true
+            console.log('✅ Auto-reply email sent successfully to GUEST:', sanitizedData.email)
+            console.log('   EmailJS response:', sendResult)
+          } catch (autoReplyError) {
+            console.error('❌ Failed to send auto-reply email:', autoReplyError)
+            console.error('   Error details:', {
+              status: autoReplyError.status,
+              text: autoReplyError.text,
+              guest_email: sanitizedData.email,
+              recipient_email: RECIPIENT_EMAIL
+            })
+            // Don't throw - RSVP notification might have succeeded
+            // User will still see success message since form was submitted
+          }
+        }
+      }
+
+      // Log errors only
+      if (!rsvpEmailSent) {
+        console.error('RSVP notification email was not sent')
+      }
+      if (sanitizedData.email && !autoReplySent) {
+        console.error('Auto-reply email was not sent to:', sanitizedData.email)
+      }
+    } else {
+      // Fallback: Log to console if EmailJS is not loaded
+      console.log("RSVP Form submitted:", sanitizedData)
+      console.warn("EmailJS is not loaded. Please include EmailJS SDK in your HTML.")
+    }
+
+    // Show success message
     const successMessage = document.createElement("div")
     successMessage.className = "rsvp-success-message"
     successMessage.innerHTML = `
       <div class="success-content">
         <span class="success-icon">💕</span>
-        <h3>Cảm ơn bạn rất nhiều!</h3>
-        <p>Chúng tôi đã nhận được xác nhận tham dự của bạn. Chúng tôi rất mong được gặp bạn trong ngày trọng đại!</p>
-        <button onclick="this.parentElement.parentElement.remove()" class="success-close-btn">Đóng</button>
+        <h3>${isEnglish ? 'Thank you very much!' : 'Cảm ơn bạn rất nhiều!'}</h3>
+        <p>${isEnglish 
+          ? 'We have received your RSVP confirmation. We look forward to seeing you on our special day!' 
+          : 'Chúng tôi đã nhận được xác nhận tham dự của bạn. Chúng tôi rất mong được gặp bạn trong ngày trọng đại!'}</p>
+        <button onclick="this.parentElement.parentElement.remove()" class="success-close-btn">
+          ${isEnglish ? 'Close' : 'Đóng'}
+        </button>
       </div>
     `
-    rsvpForm.appendChild(successMessage)
+    document.body.appendChild(successMessage)
 
     // Reset form
     setTimeout(() => {
       rsvpForm.reset()
-      successMessage.remove()
-    }, 5000)
+      // Hide guests field if needed
+      const guestsGroup = document.getElementById("guestsGroup")
+      if (guestsGroup) {
+        guestsGroup.style.display = "none"
+      }
+    }, 1000)
     
+    // Auto remove success message after 8 seconds
+    setTimeout(() => {
+      if (successMessage.parentElement) {
+        successMessage.remove()
+      }
+    }, 8000)
+    
+  } catch (error) {
+    console.error("Error sending RSVP:", error)
+    
+    // Show error message
+    const errorMessage = document.createElement("div")
+    errorMessage.className = "rsvp-success-message"
+    errorMessage.innerHTML = `
+      <div class="success-content" style="border-color: #e91e63;">
+        <span class="success-icon">⚠️</span>
+        <h3>${isEnglish ? 'Oops! Something went wrong' : 'Ồ! Có lỗi xảy ra'}</h3>
+        <p>${isEnglish 
+          ? 'Please try again later or contact us directly. Thank you!' 
+          : 'Vui lòng thử lại sau hoặc liên hệ trực tiếp với chúng tôi. Cảm ơn bạn!'}</p>
+        <button onclick="this.parentElement.parentElement.remove()" class="success-close-btn">
+          ${isEnglish ? 'Close' : 'Đóng'}
+        </button>
+      </div>
+    `
+    document.body.appendChild(errorMessage)
+    
+    setTimeout(() => {
+      if (errorMessage.parentElement) {
+        errorMessage.remove()
+      }
+    }, 8000)
+  } finally {
     // Reset button
     submitBtn.disabled = false
     submitBtn.classList.remove("loading")
     btnText.textContent = originalText
-  }, 1500)
+  }
 })
 
 // Show/hide guests field based on attendance
@@ -224,7 +441,7 @@ window.addEventListener("scroll", () => {
   }
 })
 
-// Email Configuration
+// Email Configuration (only if forms exist)
 const emailConfigForm = document.getElementById("emailConfigForm")
 const sendEmailForm = document.getElementById("sendEmailForm")
 const emailStatus = document.getElementById("emailStatus")
@@ -234,17 +451,25 @@ function loadEmailConfig() {
   const savedConfig = localStorage.getItem("weddingEmailConfig")
   if (savedConfig) {
     const config = JSON.parse(savedConfig)
-    document.getElementById("senderEmail").value = config.senderEmail || ""
-    document.getElementById("senderName").value = config.senderName || ""
-    document.getElementById("appPassword").value = config.appPassword || ""
-    document.getElementById("recipientEmails").value = config.recipientEmails || ""
-    document.getElementById("emailSubject").value = config.emailSubject || "Thiệp mời đám cưới - Minh & Linh"
-    document.getElementById("emailMessage").value = config.emailMessage || ""
+    const senderEmail = document.getElementById("senderEmail")
+    const senderName = document.getElementById("senderName")
+    const appPassword = document.getElementById("appPassword")
+    const recipientEmails = document.getElementById("recipientEmails")
+    const emailSubject = document.getElementById("emailSubject")
+    const emailMessage = document.getElementById("emailMessage")
+    
+    if (senderEmail) senderEmail.value = config.senderEmail || ""
+    if (senderName) senderName.value = config.senderName || ""
+    if (appPassword) appPassword.value = config.appPassword || ""
+    if (recipientEmails) recipientEmails.value = config.recipientEmails || ""
+    if (emailSubject) emailSubject.value = config.emailSubject || "Thiệp mời đám cưới - Ngọc & Tài"
+    if (emailMessage) emailMessage.value = config.emailMessage || "Chúc mừng đám cưới Ngọc & Tài nhé"
   }
 }
 
-// Save email config to localStorage
-emailConfigForm.addEventListener("submit", (e) => {
+// Save email config to localStorage (only if form exists)
+if (emailConfigForm) {
+  emailConfigForm.addEventListener("submit", (e) => {
   e.preventDefault()
 
   const config = {
@@ -258,16 +483,22 @@ emailConfigForm.addEventListener("submit", (e) => {
 
   localStorage.setItem("weddingEmailConfig", JSON.stringify(config))
 
-  showEmailStatus("success", "Cấu hình email đã được lưu thành công!")
-  
-  // Clear status after 3 seconds
-  setTimeout(() => {
-    emailStatus.style.display = "none"
-  }, 3000)
-})
+    if (emailStatus) {
+      showEmailStatus("success", "Cấu hình email đã được lưu thành công!")
+      
+      // Clear status after 3 seconds
+      setTimeout(() => {
+        if (emailStatus) {
+          emailStatus.style.display = "none"
+        }
+      }, 3000)
+    }
+  })
+}
 
-// Send emails using EmailJS or fetch API
-sendEmailForm.addEventListener("submit", async (e) => {
+// Send emails using EmailJS or fetch API (only if form exists)
+if (sendEmailForm) {
+  sendEmailForm.addEventListener("submit", async (e) => {
   e.preventDefault()
 
   const config = JSON.parse(localStorage.getItem("weddingEmailConfig") || "{}")
@@ -351,13 +582,18 @@ sendEmailForm.addEventListener("submit", async (e) => {
     sendBtn.classList.remove("loading")
     sendBtn.innerHTML = originalBtnContent
   }
-})
+  })
+}
 
 // Function to show email status
 function showEmailStatus(type, message) {
-  emailStatus.className = `email-status ${type}`
-  emailStatus.textContent = message
-  emailStatus.style.display = "block"
+  if (emailStatus) {
+    emailStatus.className = `email-status ${type}`
+    emailStatus.textContent = message
+    emailStatus.style.display = "block"
+  } else {
+    console.log(`Email Status [${type}]:`, message)
+  }
 }
 
 // Simulate email sending (replace with actual implementation)

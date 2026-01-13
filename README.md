@@ -76,11 +76,29 @@ Thay thế các placeholder images bằng ảnh thật của bạn:
 2. Kết nối repository với Netlify hoặc Vercel
 3. Deploy tự động
 
-#### Deploy lên GitHub Pages:
+#### Deploy lên GitHub Pages (Tự động với GitHub Actions):
 
-1. Push code lên GitHub repository
-2. Vào Settings > Pages
-3. Chọn branch và folder để deploy
+1. **Bật GitHub Pages trong repository settings:**
+   - Vào Settings > Pages
+   - Source: chọn "GitHub Actions"
+
+2. **Push code lên GitHub:**
+   ```bash
+   git add .
+   git commit -m "Setup GitHub Pages deployment"
+   git push origin main
+   ```
+
+3. **Workflow sẽ tự động chạy:**
+   - Mỗi khi push code lên branch `main` hoặc `master`
+   - Website sẽ tự động được deploy lên GitHub Pages
+   - URL sẽ có dạng: `https://[username].github.io/[repository-name]`
+
+4. **Kiểm tra deployment:**
+   - Vào tab "Actions" trong repository để xem trạng thái deployment
+   - Sau khi thành công, website sẽ có sẵn trên GitHub Pages
+
+**Lưu ý:** File `.github/workflows/deploy.yml` đã được tạo sẵn để tự động deploy.
 
 ## Tùy Chỉnh Màu Sắc
 

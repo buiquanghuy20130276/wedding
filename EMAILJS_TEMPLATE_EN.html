@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wedding RSVP Email Template - English</title>
+  <style type="text/css">
+    /* Responsive Styles */
+    @media only screen and (max-width: 600px) {
+      .email-container {
+        padding: 20px 10px !important;
+      }
+      .email-card {
+        width: 100% !important;
+        max-width: 100% !important;
+        border-radius: 15px !important;
+      }
+      .header-padding {
+        padding: 40px 25px !important;
+      }
+      .header-title {
+        font-size: 24px !important;
+        letter-spacing: 1px !important;
+      }
+      .header-subtitle {
+        font-size: 14px !important;
+      }
+      .content-padding {
+        padding: 30px 20px !important;
+      }
+      .card-padding {
+        padding: 20px 15px !important;
+      }
+      .card-title {
+        font-size: 18px !important;
+      }
+      .info-label {
+        display: block !important;
+        width: 100% !important;
+        margin-bottom: 5px !important;
+      }
+      .info-value {
+        display: block !important;
+        width: 100% !important;
+      }
+      .footer-padding {
+        padding: 25px 20px !important;
+      }
+      .footer-text {
+        font-size: 12px !important;
+      }
+      .footer-copyright {
+        font-size: 11px !important;
+      }
+    }
+  </style>
+</head>
+<body style="margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f5f5f5;">
+  
+  <!-- Email Container -->
+  <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" class="email-container" style="background-color: #f5f5f5; padding: 40px 20px;">
+    <tr>
+      <td align="center">
+        
+        <!-- Main Email Card -->
+        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="600" class="email-card" style="max-width: 600px; width: 100%; background-color: #ffffff; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.1);">
+          
+          <!-- Header with Gradient -->
+          <tr>
+            <td class="header-padding" style="background: linear-gradient(135deg, #ff6b9d 0%, #c44569 25%, #9c27b0 50%, #7b1fa2 75%, #4a148c 100%); padding: 50px 40px; text-align: center;">
+              <h1 class="header-title" style="margin: 0; color: #ffffff; font-size: 32px; font-weight: 600; letter-spacing: 2px;">
+                💕 New RSVP 💕
+              </h1>
+              <p class="header-subtitle" style="margin: 15px 0 0; color: rgba(255,255,255,0.9); font-size: 16px;">
+                You have a new attendance confirmation
+              </p>
+            </td>
+          </tr>
+
+          <!-- Content Section -->
+          <tr>
+            <td class="content-padding" style="padding: 40px;">
+              
+              <!-- Greeting -->
+              <p style="margin: 0 0 30px; color: #3d3d3d; font-size: 16px; line-height: 1.6;">
+                Hello <strong>Bích Ngọc & Tấn Tài</strong>! 💕
+              </p>
+              
+              <p style="margin: 0 0 40px; color: #6b6b6b; font-size: 15px; line-height: 1.6;">
+                You have received a new RSVP for your wedding:
+              </p>
+
+              <!-- Guest Information Card -->
+              <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" class="card-padding" style="background: linear-gradient(135deg, #fce4ec 0%, #f3e5f5 50%, #fff9c4 100%); border-radius: 15px; padding: 30px; margin-bottom: 30px;">
+                <tr>
+                  <td>
+                    <h2 class="card-title" style="margin: 0 0 20px; color: #e91e63; font-size: 20px; font-weight: 600; text-align: center;">
+                      👤 Guest Information
+                    </h2>
+                    
+                    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                      <tr>
+                        <td style="padding: 12px 0; border-bottom: 1px solid rgba(233,30,99,0.2);">
+                          <strong class="info-label" style="color: #9c27b0; display: inline-block; width: 140px;">Full Name:</strong>
+                          <span class="info-value" style="color: #3d3d3d;">{{name}}</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="padding: 12px 0; border-bottom: 1px solid rgba(233,30,99,0.2);">
+                          <strong class="info-label" style="color: #9c27b0; display: inline-block; width: 140px;">Phone Number:</strong>
+                          <span class="info-value" style="color: #3d3d3d;">{{phone}}</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="padding: 12px 0;">
+                          <strong class="info-label" style="color: #9c27b0; display: inline-block; width: 140px;">Email:</strong>
+                          <span class="info-value" style="color: #3d3d3d;">{{email}}</span>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- RSVP Details Card -->
+              <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" class="card-padding" style="background: linear-gradient(135deg, #fff9c4 0%, #fce4ec 50%, #f3e5f5 100%); border-radius: 15px; padding: 30px; margin-bottom: 30px;">
+                <tr>
+                  <td>
+                    <h2 class="card-title" style="margin: 0 0 20px; color: #e91e63; font-size: 20px; font-weight: 600; text-align: center;">
+                      💒 Attendance Confirmation
+                    </h2>
+                    
+                    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                      <tr>
+                        <td style="padding: 12px 0; border-bottom: 1px solid rgba(233,30,99,0.2);">
+                          <strong class="info-label" style="color: #9c27b0; display: inline-block; width: 140px;">Attendance:</strong>
+                          <span class="info-value" style="color: #3d3d3d; font-weight: 600;">{{attendance}}</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="padding: 12px 0;">
+                          <strong class="info-label" style="color: #9c27b0; display: inline-block; width: 140px;">Number of Guests:</strong>
+                          <span class="info-value" style="color: #3d3d3d; font-weight: 600;">{{guests}} people</span>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- Message Card -->
+              {{#message}}
+              <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" class="card-padding" style="background: linear-gradient(135deg, #f3e5f5 0%, #fff9c4 50%, #fce4ec 100%); border-radius: 15px; padding: 30px; margin-bottom: 30px;">
+                <tr>
+                  <td>
+                    <h2 class="card-title" style="margin: 0 0 15px; color: #e91e63; font-size: 20px; font-weight: 600; text-align: center;">
+                      💝 Your Wishes
+                    </h2>
+                    <p style="margin: 0; color: #3d3d3d; font-size: 15px; line-height: 1.8; font-style: italic; text-align: center; word-wrap: break-word;">
+                      "{{message}}"
+                    </p>
+                  </td>
+                </tr>
+              </table>
+              {{/message}}
+
+              <!-- Wedding Info Footer -->
+              <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #fff5f8; border-radius: 15px; padding: 25px; text-align: center;">
+                <tr>
+                  <td>
+                    <p style="margin: 0 0 10px; color: #9c27b0; font-size: 14px; font-weight: 600;">
+                      📅 Wedding Date: {{wedding_date}}
+                    </p>
+                    <p style="margin: 0; color: #e91e63; font-size: 16px; font-weight: 600;">
+                      💕 {{couple_names}}
+                    </p>
+                  </td>
+                </tr>
+              </table>
+
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td class="footer-padding" style="background-color: #2a2a2a; padding: 30px; text-align: center;">
+              <p class="footer-text" style="margin: 0; color: rgba(255,255,255,0.7); font-size: 13px;">
+                This email was automatically sent from the wedding RSVP system
+              </p>
+              <p class="footer-copyright" style="margin: 10px 0 0; color: rgba(255,255,255,0.5); font-size: 12px;">
+                © 2026 - Bích Ngọc & Tấn Tài
+              </p>
+            </td>
+          </tr>
+
+        </table>
+
+      </td>
+    </tr>
+  </table>
+
+</body>
+</html>
