@@ -4,9 +4,6 @@
   "private": true,
   "description": "Wedding invitation website for Bích Ngọc & Tấn Tài",
   "scripts": {
-    "build": "echo 'Static site - no build needed'",
-    "lint": "echo 'No linting configured'"
-  },
-  "dependencies": {},
-  "devDependencies": {}
+    "build": "echo 'Static site - no build needed'"
+  }
 }
