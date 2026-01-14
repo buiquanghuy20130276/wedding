@@ -2200,6 +2200,12 @@ a {
   .gallery-item-reduce.gallery-item-medium {
     grid-row: span 9;
   }
+
+  /* Fix for Ảnh cưới 5 - show from top to body on tablet */
+  .gallery-item-tall img,
+  .gallery-item-reduce.gallery-item-tall img {
+    object-position: center 30%;
+  }
 }
 
 @media (max-width: 768px) {
@@ -2239,6 +2245,12 @@ a {
 
   .gallery-item-reduce.gallery-item-medium {
     grid-row: span 9;
+  }
+
+  /* Fix for Ảnh cưới 5 - show from top to body on mobile */
+  .gallery-item-tall img,
+  .gallery-item-reduce.gallery-item-tall img {
+    object-position: center 20%;
   }
 
   .gallery-item:hover {
