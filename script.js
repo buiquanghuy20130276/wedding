@@ -42,7 +42,9 @@ document.querySelectorAll(".mobile-links a").forEach((link) => {
 
 // Countdown Timer
 function updateCountdown() {
-  const weddingDate = new Date("2026-01-24T08:00:00").getTime()
+  // Đếm đến ngày 25/01/2026 (ví dụ: 11:00 sáng giờ địa phương)
+  // Dùng constructor Date theo dạng số để tránh lệch ngày do timezone
+  const weddingDate = new Date(2026, 0, 25, 11, 0, 0).getTime()
   const now = new Date().getTime()
   const distance = weddingDate - now
 
