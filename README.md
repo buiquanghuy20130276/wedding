@@ -121,6 +121,9 @@ Chỉnh sửa các biến CSS trong `styles.css`:
 ├── script.js           # File JavaScript
 ├── package.json        # Dependencies (nếu cần)
 └── README.md           # Hướng dẫn này
+
+
+
 ```
 
 ## Lưu Ý Bảo Mật
